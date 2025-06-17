@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodología de Investigación - Casa Hogar Chetumal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #2c6e49;
+            --color-secondary: #4c956c;
+            --color-accent: #fefee3;
+            --color-light: #f9f9f9;
+            --color-dark: #333;
+            --color-text: #444;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--color-text);
+            line-height: 1.6;
+            background-color: var(--color-light);
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--color-primary);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            display: inline-block;
+            padding-bottom: var(--spacing-sm);
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--color-secondary);
+            border-radius: 2px;
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        section {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-right: var(--spacing-sm);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: var(--spacing-lg);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--color-dark);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--color-primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: var(--border-radius);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .methodology {
+            background-color: white;
+        }
+        
+        .steps-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 30px;
+            height: 100%;
+            width: 4px;
+            background-color: var(--color-accent);
+            z-index: 1;
+        }
+        
+        .method-step {
+            position: relative;
+            margin-bottom: var(--spacing-xl);
+            padding-left: 70px;
+            z-index: 2;
+        }
+        
+        .step-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 3;
+        }
+        
+        .step-content {
+            background-color: var(--color-light);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .step-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .survey {
+            background-color: var(--color-accent);
+        }
+        
+        .survey-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+        }
+        
+        .survey-form {
+            background-color: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 600px;
+            overflow: hidden;
+        }
+        
+        .survey-form iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--border-radius);
+        }
+        
+        .key-questions {
+            background-color: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .question-card {
+            background-color: var(--color-light);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--color-primary);
+            transition: var(--transition);
+        }
+        
+        .question-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.1rem;
+        }
+        
+        .question-info {
+            background-color: rgba(44, 110, 73, 0.05);
+            padding: var(--spacing-sm);
+            border-radius: 4px;
+            margin-top: var(--spacing-sm);
+            font-size: 0.9rem;
+        }
+        
+        .question-info i {
+            margin-right: 5px;
+            color: var(--color-primary);
+        }
+        
+        footer {
+            background-color: var(--color-dark);
+            color: white;
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.3rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li i {
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--color-primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        @media (max-width: 992px) {
+            .survey-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .survey-form {
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: var(--spacing-md);
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 0 var(--spacing-sm);
+            }
+            
+            .steps-container::before {
+                left: 29px;
+            }
+            
+            .method-step {
+                padding-left: 60px;
+            }
+            
+            .step-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .method-step {
+                padding-left: 50px;
+            }
+            
+            .step-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .step-content {
+                padding: var(--spacing-md);
+            }
+        }
+        
+        /* Animations */
+        .method-step, .question-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .method-step.visible, .question-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-home-heart"></i>
+                </div>
+                <div class="logo-text">Casa Hogar Chetumal</div>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="equipo.html">Nuestro Equipo</a></li>
+                    <li><a href="metodologia.html" class="active">Metodología</a></li>
+                    <li><a href="index.html#donaciones">Donaciones</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Metodología de Investigación</h1>
+            <p>Estudio sobre la problemática de recursos económicos en Casa Hogar Chetumal</p>
+        </div>
+    </section>
+
+    <section class="methodology">
+        <div class="container">
+            <h2>Nuestro Proceso de Investigación</h2>
+            
+            <div class="steps-container">
+                <div class="method-step">
+                    <div class="step-icon">1</div>
+                    <div class="step-content">
+                        <h3>Identificación de la Problemática</h3>
+                        <p>Previamente ya se había investigado y elegido una problemática de la casa hogar de Chetumal: la falta de recursos económicos que afecta directamente la calidad de vida de los niños.</p>
+                    </div>
+                </div>
+                
+                <div class="method-step">
+                    <div class="step-icon">2</div>
+                    <div class="step-content">
+                        <h3>Diseño de la Encuesta</h3>
+                        <p>Con toda la información recabada se realizó una encuesta en la cual todos los integrantes del equipo aportaron una pregunta relacionada con la problemática económica de la casa hogar.</p>
+                    </div>
+                </div>
+                
+                <div class="method-step">
+                    <div class="step-icon">3</div>
+                    <div class="step-content">
+                        <h3>Implementación</h3>
+                        <p>Esta encuesta fue dirigida a gente mayor de 18 años para saber qué tan conscientes y enterados están de la situación de los niños en la casa hogar.</p>
+                    </div>
+                </div>
+                
+                <div class="method-step">
+                    <div class="step-icon">4</div>
+                    <div class="step-content">
+                        <h3>Recolección de Datos</h3>
+                        <p>Se recopilaron más de 200 respuestas durante un período de dos semanas. El equipo supervisó diariamente la recolección para garantizar la calidad y diversidad de los datos obtenidos.</p>
+                    </div>
+                </div>
+                
+                <div class="method-step">
+                    <div class="step-icon">5</div>
+                    <div class="step-content">
+                        <h3>Análisis e Interpretación</h3>
+                        <p>Utilizando herramientas estadísticas básicas, analizamos las respuestas para identificar patrones y tendencias. El enfoque se centró en comprender el nivel de conciencia social sobre la situación de Casa Hogar Chetumal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="survey">
+        <div class="container">
+            <h2>Nuestra Encuesta</h2>
+            
+            <div class="survey-container">
+                <div class="survey-form">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScafVL_iGo8eqEWQyHE-_p96elHBR2n5N9ZWF8mFlQG8xr4ng/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+                </div>
+                
+                <div class="key-questions">
+                    <h3>Preguntas Clave de la Encuesta</h3>
+                    <p>Estas preguntas fueron fundamentales para evaluar el conocimiento y percepción de la comunidad sobre la situación económica de Casa Hogar Chetumal:</p>
+                    
+                    <div class="question-card">
+                        <div class="question-number">Pregunta 1</div>
+                        <p>¿Sabes o tienes noción si en la Casa Hogar de Chetumal se cuenta con los recursos para satisfacer las necesidades de los niños que habitan en ella?</p>
+                        <p class="question-info"><i class="fas fa-info-circle"></i> Esta pregunta busca medir el nivel de conocimiento general sobre la situación de la institución.</p>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">Pregunta 7</div>
+                        <p>¿Qué crees que es lo más importante para mejorar la vida de los niños de la Casa Hogar?</p>
+                        <p class="question-info"><i class="fas fa-info-circle"></i> Busca identificar las prioridades percibidas por la comunidad para mejorar las condiciones de vida de los niños.</p>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">Pregunta 8</div>
+                        <p>¿Consideras que en la Casa Hogar de Chetumal tiene suficientes recursos económicos para proporcionar alimentación adecuada a los niños que atiende?</p>
+                        <p class="question-info"><i class="fas fa-info-circle"></i> Esta pregunta evalúa la percepción sobre uno de los aspectos más críticos: la alimentación de los niños.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Casa Hogar Chetumal</h3>
+                    <p>Un refugio de amor y esperanza para niños en situación de vulnerabilidad.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="equipo.html">Nuestro Equipo</a></li>
+                        <li><a href="metodologia.html">Metodología</a></li>
+                        <li><a href="index.html#donaciones">Donaciones</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Calle Esperanza #123, Chetumal, Q.Roo</li>
+                        <li><i class="fas fa-phone"></i> (983) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> contacto@casahogarchetumal.org</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Casa Hogar Chetumal. Todos los derechos reservados. | Proyecto realizado por estudiantes del CBTIS 253
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación para mostrar elementos al hacer scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            // Observar los elementos que deben aparecer
+            document.querySelectorAll('.method-step, .question-card').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
