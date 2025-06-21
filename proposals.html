@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuestas - Casa Hogar Chetumal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables y reset */
+        :root {
+            --color-primary: #2c6e49;
+            --color-secondary: #4c956c;
+            --color-accent: #fefee3;
+            --color-light: #f9f9f9;
+            --color-dark: #333;
+            --color-text: #444;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
+            --border-radius: 4px;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--color-text);
+            line-height: 1.6;
+            background-color: var(--color-light);
+        }
+        
+        /* Tipografía */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--color-primary);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--color-secondary);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        /* Contenedores */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        section {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-right: var(--spacing-sm);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: var(--spacing-lg);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--color-dark);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        nav a.active, nav a:hover {
+            color: var(--color-primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            transition: var(--transition);
+        }
+        
+        nav a.active::after, nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Sección de Soluciones */
+        .soluciones {
+            background-color: white;
+        }
+        
+        .soluciones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .solucion-card {
+            background-color: var(--color-light);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 4px solid var(--color-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .solucion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .solucion-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44, 110, 73, 0.05) 0%, rgba(255,255,255,0) 100%);
+            z-index: 0;
+        }
+        
+        .solucion-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .solucion-icon {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        /* Sección de Plan de Acción */
+        .plan-accion {
+            background-color: var(--color-accent);
+        }
+        
+        .plan-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+        
+        .plan-text {
+            padding-right: var(--spacing-lg);
+        }
+        
+        .plan-image {
+            background: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+            height: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .action-steps {
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .step-item {
+            display: flex;
+            margin-bottom: var(--spacing-md);
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background-color: var(--color-primary);
+            color: white;
+            min-width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+        }
+        
+        /* Sección de Recursos */
+        .recursos {
+            background-color: white;
+        }
+        
+        .recursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .recurso-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--color-primary);
+        }
+        
+        .recurso-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .recurso-icon {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-dark);
+            color: white;
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.3rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--color-primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .plan-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .plan-text {
+                padding-right: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                font-size: 1.5rem;
+                background: none;
+                border: none;
+                color: var(--color-dark);
+                cursor: pointer;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: var(--spacing-md);
+                justify-content: center;
+            }
+            
+            nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: var(--spacing-md);
+            }
+            
+            nav li {
+                margin: 0 var(--spacing-sm) var(--spacing-sm);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav li {
+                margin: 0 0 var(--spacing-sm);
+            }
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mobile-menu.active {
+            display: flex;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+            text-align: center;
+        }
+        
+        .mobile-menu ul li {
+            margin: var(--spacing-md) 0;
+        }
+        
+        .mobile-menu ul li a {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-home-heart"></i>
+                </div>
+                <div class="logo-text">Casa Hogar Chetumal</div>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="equipo.html">Nosotros</a></li>
+                    <li><a href="investigacion.html">Investigación</a></li>
+                    <li><a href="resultados.html">Resultados</a></li>
+                    <li><a href="propuesta.html" class="active">Propuesta</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="equipo.html">Nosotros</a></li>
+            <li><a href="investigacion.html">Investigación</a></li>
+            <li><a href="resultados.html">Resultados</a></li>
+            <li><a href="propuesta.html" class="active">Propuesta</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Propuestas de Acción</h1>
+            <p>Soluciones concretas basadas en nuestra investigación para apoyar a la Casa Hogar Chetumal</p>
+            <p>Plan de acción detallado y recursos necesarios para mejorar las condiciones de los niños y niñas.</p>
+        </div>
+    </section>
+
+    <!-- Soluciones basadas en la investigación -->
+    <section class="soluciones">
+        <div class="container">
+            <h2>Soluciones basadas en la investigación</h2>
+            <p>Propuestas concretas identificadas a través de nuestro estudio para apoyar a la Casa Hogar:</p>
+            
+            <div class="soluciones-grid">
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3>Donativos</h3>
+                        <p>Recolección de alimentos, ropa, calzado y productos de higiene para cubrir las necesidades básicas de los niños.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h3>Programas de apoyo</h3>
+                        <p>Desarrollo de programas educativos, recreativos y de desarrollo personal para los niños de la casa hogar.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3>Apoyo económico</h3>
+                        <p>Recaudación de fondos para cubrir gastos operativos y mejorar las instalaciones de la casa hogar.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-broom"></i>
+                        </div>
+                        <h3>Limpieza de instalaciones</h3>
+                        <p>Organización de jornadas de limpieza y mantenimiento para mejorar las condiciones de vida de los niños.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Atención psicológica</h3>
+                        <p>Implementación de un programa de apoyo emocional y psicológico para los niños y personal de la casa hogar.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3>Revisiones continuas</h3>
+                        <p>Evaluaciones periódicas de las condiciones de la casa hogar y necesidades de los niños.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Eventos de concienciación</h3>
+                        <p>Organización de ferias, charlas y actividades para dar a conocer la labor de la casa hogar y recaudar fondos.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3>Movilizaciones sociales</h3>
+                        <p>Acciones de incidencia política para solicitar mayor apoyo gubernamental a la casa hogar.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <h3>Recaudaciones anuales</h3>
+                        <p>Establecimiento de campañas de recaudación periódicas para asegurar recursos continuos.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Talleres de inclusión</h3>
+                        <p>Talleres para fomentar la autoestima y habilidades sociales de los niños para su integración en la sociedad.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h3>Actividades culturales</h3>
+                        <p>Promoción de actividades artísticas y culturales para el desarrollo integral de los niños.</p>
+                    </div>
+                </div>
+                
+                <div class="solucion-card">
+                    <div class="solucion-content">
+                        <div class="solucion-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Voluntariado especializado</h3>
+                        <p>Reclutamiento de profesionales voluntarios para brindar servicios especializados a los niños.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan de acción concreto -->
+    <section class="plan-accion">
+        <div class="container">
+            <h2>Plan de Acción Concreto</h2>
+            <div class="plan-content">
+                <div class="plan-text">
+                    <p>Nuestro plan de acción se centra en recaudar donativos para los niños de la Casa Hogar, solución prioritaria identificada en nuestra encuesta:</p>
+                    
+                    <div class="action-steps">
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h3>Campañas de donación</h3>
+                                <p>Solicitar donaciones en plataformas online como Facebook e Instagram, además de informar personalmente a los ciudadanos con semanas de anticipación. Se recibirán alimentos, ropa, calzado y productos de higiene.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h3>Eventos de recaudación</h3>
+                                <p>Organizar rifas, ventas de comida y actividades deportivas divertidas para recaudar fondos y llevarlos directamente a la casa hogar o convertirlos en despensas.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h3>Campañas de concientización</h3>
+                                <p>Desarrollar campañas informativas sobre la situación actual de los niños, incluyendo proyectos comunitarios con juegos y actividades recreativas para recaudar donaciones en especie o efectivo.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div>
+                                <h3>Programas de voluntariado</h3>
+                                <p>Crear un programa estructurado de voluntariado que permita a la comunidad participar directamente en actividades de apoyo a los niños.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number">5</div>
+                            <div>
+                                <h3>Talleres de inclusión</h3>
+                                <p>Implementar talleres regulares para fortalecer la autoestima de los niños y su capacidad para integrarse en la sociedad sin sentirse diferentes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#recursos" class="btn">Ver recursos necesarios</a>
+                </div>
+                
+                <div class="plan-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recursos necesarios -->
+    <section id="recursos" class="recursos">
+        <div class="container">
+            <h2>Recursos Necesarios</h2>
+            <p>Elementos fundamentales para implementar exitosamente nuestro plan de acción:</p>
+            
+            <div class="recursos-grid">
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <i class="fas fa-money-bill-alt"></i>
+                    </div>
+                    <h3>Fondos económicos</h3>
+                    <p>Recursos financieros recaudados mediante eventos de caridad, campañas en redes sociales y donaciones directas.</p>
+                </div>
+                
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Voluntarios comprometidos</h3>
+                    <p>Personas que puedan ofrecer su tiempo y habilidades para ayudar en la casa hogar de manera regular.</p>
+                </div>
+                
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Profesionales especializados</h3>
+                    <p>Médicos, psicólogos, abogados y otros profesionales que brinden servicios gratuitos o a bajo costo.</p>
+                </div>
+                
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Redes de colaboración</h3>
+                    <p>Alianzas estratégicas con otras organizaciones benéficas, empresas locales y grupos comunitarios.</p>
+                </div>
+                
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Fuentes de ingreso</h3>
+                    <p>Exploración de opciones para generar ingresos adicionales, como ventas de productos artesanales o servicios.</p>
+                </div>
+                
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3>Donaciones en especie</h3>
+                    <p>Materiales, equipos y suministros necesarios para el funcionamiento diario de la casa hogar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Casa Hogar Chetumal</h3>
+                    <p>Un refugio de amor y esperanza para niños en situación de vulnerabilidad.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="equipo.html">Nosotros</a></li>
+                        <li><a href="investigacion.html">Investigación</a></li>
+                        <li><a href="resultados.html">Resultados</a></li>
+                        <li><a href="propuesta.html">Propuesta</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Calle Esperanza #123, Chetumal, Q.Roo</li>
+                        <li><i class="fas fa-phone"></i> (983) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> contacto@casahogarchetumal.org</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Casa Hogar Chetumal. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling para los enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Efecto de aparición suave al hacer scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observar los elementos que deben aparecer
+        document.querySelectorAll('section, .solucion-card, .recurso-card').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+            
+            section.classList.add('visible');
+        });
+        
+        // Actualizar el CSS con las clases de visibilidad
+        const style = document.createElement('style');
+        style.textContent = `
+            section.visible, .solucion-card.visible, .recurso-card.visible {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Menú móvil
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.add('active');
+        });
+        
+        document.getElementById('closeMenu').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.remove('active');
+        });
+        
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
