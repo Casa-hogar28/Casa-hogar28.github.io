@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Investigación - Casa Hogar Chetumal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Variables y reset */
+        :root {
+            --color-primary: #2c6e49;
+            --color-secondary: #4c956c;
+            --color-accent: #fefee3;
+            --color-light: #f9f9f9;
+            --color-dark: #333;
+            --color-text: #444;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
+            --border-radius: 4px;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--color-text);
+            line-height: 1.6;
+            background-color: var(--color-light);
+        }
+        
+        /* Tipografía */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--color-primary);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--color-secondary);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        /* Contenedores */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        section {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-right: var(--spacing-sm);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: var(--spacing-lg);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--color-dark);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        nav a.active, nav a:hover {
+            color: var(--color-primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            transition: var(--transition);
+        }
+        
+        nav a.active::after, nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Sección de Gráficos */
+        .graphics {
+            background-color: white;
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .chart-container {
+            background-color: var(--color-light);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .chart-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .chart-title {
+            color: var(--color-primary);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .chart-number {
+            background-color: var(--color-secondary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .chart-wrapper {
+            height: 300px;
+            position: relative;
+        }
+        
+        .chart-description {
+            margin-top: var(--spacing-md);
+            padding: var(--spacing-md);
+            background-color: rgba(44, 110, 73, 0.05);
+            border-radius: var(--border-radius);
+        }
+        
+        /* Sección de Análisis */
+        .analysis {
+            background-color: var(--color-accent);
+        }
+        
+        .analysis-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow);
+        }
+        
+        .finding-item {
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .finding-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .finding-highlight {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-dark);
+            color: white;
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.3rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--color-primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                font-size: 1.5rem;
+                background: none;
+                border: none;
+                color: var(--color-dark);
+                cursor: pointer;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: var(--spacing-md);
+                justify-content: center;
+            }
+            
+            nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: var(--spacing-md);
+            }
+            
+            nav li {
+                margin: 0 var(--spacing-sm) var(--spacing-sm);
+            }
+            
+            .chart-wrapper {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav li {
+                margin: 0 0 var(--spacing-sm);
+            }
+            
+            .chart-wrapper {
+                height: 200px;
+            }
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mobile-menu.active {
+            display: flex;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+            text-align: center;
+        }
+        
+        .mobile-menu ul li {
+            margin: var(--spacing-md) 0;
+        }
+        
+        .mobile-menu ul li a {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-home-heart"></i>
+                </div>
+                <div class="logo-text">Casa Hogar Chetumal</div>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="equipo.html">Nosotros</a></li>
+                    <li><a href="investigacion.html">Investigación</a></li>
+                    <li><a href="resultados.html" class="active">Resultados</a></li>
+                    <li><a href="propuesta.html">Propuesta</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="equipo.html">Nosotros</a></li>
+            <li><a href="investigacion.html">Investigación</a></li>
+            <li><a href="resultados.html" class="active">Resultados</a></li>
+            <li><a href="propuesta.html">Propuesta</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Resultados de la Investigación</h1>
+            <p>Análisis detallado de los datos recopilados sobre la Casa Hogar Chetumal</p>
+            <p>Presentación de gráficos y hallazgos clave de nuestra encuesta a la comunidad de Chetumal.</p>
+        </div>
+    </section>
+
+    <!-- Gráficos y Visualizaciones -->
+    <section id="graficos" class="graphics">
+        <div class="container">
+            <h2>Gráficos y Visualizaciones</h2>
+            <p>Visualización de los datos recopilados mediante nuestra encuesta a la comunidad de Chetumal.</p>
+            
+            <div class="chart-grid">
+                <!-- Gráfico 1: Sexo -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Distribución por Sexo</div>
+                        <div class="chart-number">1</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="sexoChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> La mayor parte de los que respondieron la encuesta fueron del género femenino.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 2: Edad -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Distribución por Edad</div>
+                        <div class="chart-number">2</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="edadChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 48.20% fueron personas de entre 16 a 20 años.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 3: Ocupación -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Ocupación de los Encuestados</div>
+                        <div class="chart-number">3</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="ocupacionChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> Los encuestados provienen de diversas ocupaciones, destacando médicos, estudiantes, amas de casa, enfermeras y maestros.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 4: Conocimiento del tema -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Conocimiento sobre el Tema</div>
+                        <div class="chart-number">4</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="conocimientoChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 55.2% de la población encuestada tiene conocimiento sobre el tema.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 5: Razones falta de recursos -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Razones de la Falta de Recursos</div>
+                        <div class="chart-number">5</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="razonesChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 38.6% opinan que el insuficiente presupuesto asignado es la razón principal, y el 2% piensa que es por la corrupción del gobierno y la falta de apoyo.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 6: Desafíos de la Casa Hogar -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Desafíos de la Casa Hogar</div>
+                        <div class="chart-number">6</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="desafiosChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 34.7% de las personas opinó que la Casa Hogar tiene los mismos desafíos que otras instituciones, y el 33.7% cree que no enfrenta problemas debido a su ubicación.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 7: Atenciones en la Casa Hogar -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Atenciones Recibidas</div>
+                        <div class="chart-number">7</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="atencionesChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 44.6% opinó que en la Casa Hogar recibe todas las atenciones necesarias y el 3% no conoce mucho acerca de la situación.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 8: Servicios a los niños -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Servicios Brindados a los Niños</div>
+                        <div class="chart-number">8</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="serviciosChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 14.9% opina que a los niños se les brinda un trabajo social mientras que el 61.4% opina que se les brindan todas las atenciones necesarias.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 9: Áreas de mejora -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Áreas de Mejora</div>
+                        <div class="chart-number">9</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="mejorasChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 42.6% opinó que lo más importante es mejorar la atención de los menores, mientras que el 24.8% dice que hay que mejorar la transferencia en el manejo del dinero.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 10: Necesidades prioritarias -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Necesidades Prioritarias</div>
+                        <div class="chart-number">10</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="necesidadesChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 35.6% dice que lo más importante es brindarles acceso a educación de calidad, mientras que el 34.7% opina que es garantizarles un entorno seguro y saludable.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 11: Dificultades económicas -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Dificultades Económicas</div>
+                        <div class="chart-number">11</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="dificultadesChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 50.5% consideró que la casa hogar enfrenta dificultades económicas y el 3% opina que no tiene suficiente conocimiento acerca de los recursos.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 12: Impacto de falta de recursos -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Impacto de la Falta de Recursos</div>
+                        <div class="chart-number">12</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="impactoChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 38.6% consideró que el principal impacto es la falta de recursos y materiales básicos, el 31.7% opinó que es la limitación en el apoyo emocional.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 13: Responsabilidad -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Responsabilidad de la Falta de Recursos</div>
+                        <div class="chart-number">13</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="responsabilidadChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 57.4% opinó que el gobierno municipal es responsable, mientras que el 10.9% consideró que es el gobierno federal.</p>
+                    </div>
+                </div>
+                
+                <!-- Gráfico 14: Soluciones -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Soluciones Propuestas</div>
+                        <div class="chart-number">14</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="solucionesChart"></canvas>
+                    </div>
+                    <div class="chart-description">
+                        <p><strong>Hallazgo:</strong> El 30.71% dijo que hay que realizar donativos y el 18.38% opina que hay que hacer apoyos directos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Análisis de Hallazgos Principales -->
+    <section id="analisis" class="analysis">
+        <div class="container">
+            <h2>Análisis de Hallazgos Principales</h2>
+            
+            <div class="analysis-content">
+                <div class="finding-item">
+                    <span class="finding-highlight">Sexo de los encuestados</span>
+                    <p>La mayoría de los participantes en la encuesta fueron mujeres, lo que sugiere una mayor conciencia o interés de este grupo demográfico en temas relacionados con la infancia y el bienestar social.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Perfil de edad</span>
+                    <p>Casi la mitad de los encuestados (48.20%) pertenecen al grupo de 16 a 20 años, indicando una fuerte participación de jóvenes en este estudio. Esto podría reflejar el compromiso de las nuevas generaciones con problemas sociales.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Conocimiento sobre el tema</span>
+                    <p>Poco más de la mitad de los encuestados (55.2%) afirmaron tener conocimiento sobre la situación de la Casa Hogar, lo que revela una oportunidad significativa para aumentar la conciencia pública sobre esta institución.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Razones de la falta de recursos</span>
+                    <p>La percepción predominante (38.6%) es que la principal razón de la falta de recursos es el insuficiente presupuesto asignado, mientras que solo un 2% menciona la corrupción gubernamental como causa.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Desafíos institucionales</span>
+                    <p>Existe una división casi igual en las percepciones: 34.7% cree que la Casa Hogar enfrenta desafíos similares a otras instituciones, mientras que 33.7% considera que no tiene problemas debido a su ubicación.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Atenciones recibidas</span>
+                    <p>Casi la mitad de los encuestados (44.6%) cree que la Casa Hogar recibe todas las atenciones necesarias, aunque un pequeño porcentaje (3%) admite no tener suficiente conocimiento sobre la situación.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Servicios a los niños</span>
+                    <p>La mayoría (61.4%) opina que se brindan todas las atenciones necesarias a los niños, mientras que solo el 14.9% menciona específicamente el trabajo social como servicio prestado.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Áreas de mejora</span>
+                    <p>La mejora en la atención a menores (42.6%) y la transparencia en el manejo de fondos (24.8%) son percibidas como las áreas más importantes para mejorar en la Casa Hogar.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Necesidades prioritarias</span>
+                    <p>Educación de calidad (35.6%) y entornos seguros (34.7%) son consideradas las necesidades más importantes para los niños de la Casa Hogar, mostrando una visión equilibrada entre desarrollo académico y bienestar físico.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Dificultades económicas</span>
+                    <p>La mitad de los encuestados (50.5%) reconoce que la Casa Hogar enfrenta dificultades económicas, mientras que un pequeño porcentaje (3%) admite desconocer la situación económica de la institución.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Impacto de la falta de recursos</span>
+                    <p>La falta de recursos materiales (38.6%) y la limitación en apoyo emocional (31.7%) son percibidas como los principales impactos de la falta de recursos, destacando necesidades tanto físicas como psicológicas.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Responsabilidad</span>
+                    <p>La responsabilidad principal se atribuye al gobierno municipal (57.4%), seguido del gobierno federal (10.9%), mostrando una percepción de que las soluciones deben provenir principalmente del ámbito local.</p>
+                </div>
+                
+                <div class="finding-item">
+                    <span class="finding-highlight">Soluciones propuestas</span>
+                    <p>Las soluciones más mencionadas son los donativos (30.71%) y los apoyos directos (18.38%), indicando que la comunidad ve la participación ciudadana como clave para mejorar la situación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Casa Hogar Chetumal</h3>
+                    <p>Un refugio de amor y esperanza para niños en situación de vulnerabilidad.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="equipo.html">Nosotros</a></li>
+                        <li><a href="investigacion.html">Investigación</a></li>
+                        <li><a href="resultados.html">Resultados</a></li>
+                        <li><a href="propuesta.html">Propuesta</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Calle Esperanza #123, Chetumal, Q.Roo</li>
+                        <li><i class="fas fa-phone"></i> (983) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> contacto@casahogarchetumal.org</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Casa Hogar Chetumal. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Configuración común para gráficos
+        Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+        Chart.defaults.color = '#444';
+        Chart.defaults.font.size = 12;
+        
+        // Gráfico de Sexo
+        const sexoCtx = document.getElementById('sexoChart').getContext('2d');
+        const sexoChart = new Chart(sexoCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Femenino', 'Masculino', 'Otro'],
+                datasets: [{
+                    data: [65, 33, 2],
+                    backgroundColor: ['#4c956c', '#2c6e49', '#ff6b6b'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.raw}%` } }
+                }
+            }
+        });
+        
+        // Gráfico de Edad
+        const edadCtx = document.getElementById('edadChart').getContext('2d');
+        const edadChart = new Chart(edadCtx, {
+            type: 'bar',
+            data: {
+                labels: ['16-20 años', '21-30 años', '31-40 años', '41-50 años', '51+ años'],
+                datasets: [{
+                    label: 'Porcentaje',
+                    data: [48.2, 25.7, 15.8, 7.9, 2.4],
+                    backgroundColor: '#2c6e49',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, max: 60 }
+                }
+            }
+        });
+        
+        // Gráfico de Ocupación (simplificado)
+        const ocupacionCtx = document.getElementById('ocupacionChart').getContext('2d');
+        const ocupacionChart = new Chart(ocupacionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Estudiantes', 'Médicos', 'Amas de casa', 'Enfermeras', 'Maestros', 'Otros'],
+                datasets: [{
+                    data: [30, 20, 18, 15, 12, 5],
+                    backgroundColor: ['#2c6e49', '#4c956c', '#95d5b2', '#b7e4c7', '#d8f3dc', '#ff6b6b'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+        
+        // Gráfico de Conocimiento
+        const conocimientoCtx = document.getElementById('conocimientoChart').getContext('2d');
+        const conocimientoChart = new Chart(conocimientoCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Sí tiene conocimiento', 'No tiene conocimiento', 'Poco conocimiento'],
+                datasets: [{
+                    data: [55.2, 30.3, 14.5],
+                    backgroundColor: ['#4c956c', '#ff6b6b', '#f9c74f'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+        
+        // Gráfico de Razones falta de recursos
+        const razonesCtx = document.getElementById('razonesChart').getContext('2d');
+        const razonesChart = new Chart(razonesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Presupuesto insuficiente', 'Falta de donaciones', 'Mala administración', 'Corrupción', 'Otros'],
+                datasets: [{
+                    label: 'Porcentaje',
+                    data: [38.6, 25.7, 20.8, 2, 12.9],
+                    backgroundColor: '#2c6e49',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, max: 45 } }
+            }
+        });
+        
+        // Gráfico de Desafíos
+        const desafiosCtx = document.getElementById('desafiosChart').getContext('2d');
+        const desafiosChart = new Chart(desafiosCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Mismos desafíos', 'Sin problemas por ubicación', 'Desafíos diferentes', 'No sabe'],
+                datasets: [{
+                    data: [34.7, 33.7, 20.8, 10.8],
+                    backgroundColor: ['#2c6e49', '#4c956c', '#95d5b2', '#ff6b6b'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+        
+        // Gráfico de Atenciones
+        const atencionesCtx = document.getElementById('atencionesChart').getContext('2d');
+        const atencionesChart = new Chart(atencionesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Todas las atenciones', 'Algunas atenciones', 'Pocas atenciones', 'No sabe'],
+                datasets: [{
+                    data: [44.6, 35.6, 16.8, 3],
+                    backgroundColor: ['#4c956c', '#2c6e49', '#f9c74f', '#ff6b6b'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+        
+        // Gráfico de Servicios
+        const serviciosCtx = document.getElementById('serviciosChart').getContext('2d');
+        const serviciosChart = new Chart(serviciosCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Todas atenciones', 'Trabajo social', 'Educación', 'Salud', 'Alimentación'],
+                datasets: [{
+                    label: 'Porcentaje',
+                    data: [61.4, 14.9, 10.9, 8.9, 3.9],
+                    backgroundColor: '#2c6e49',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, max: 70 } }
+            }
+        });
+        
+        // Gráfico de Mejoras
+        const mejorasCtx = document.getElementById('mejorasChart').getContext('2d');
+        const mejorasChart = new Chart(mejorasCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Atención menores', 'Manejo dinero', 'Infraestructura', 'Personal', 'Otros'],
+                datasets: [{
+                    data: [42.6, 24.8, 15.8, 10.9, 5.9],
+                    backgroundColor: ['#2c6e49', '#4c956c', '#95d5b2', '#b7e4c7', '#ff6b6b'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+        
+        // Gráfico de Necesidades
+        const necesidadesCtx = document.getElementById('necesidadesChart').getContext('2d');
+        const necesidadesChart = new Chart(necesidadesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Educación', 'Entorno seguro', 'Alimentación', 'Salud', 'Recreación'],
+                datasets: [{
+                    label: 'Porcentaje',
+                    data: [35.6, 34.7, 15.8, 10.9, 3],
+                    backgroundColor: '#2c6e49',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, max: 40 } }
+            }
+        });
+        
+        // Gráfico de Dificultades
+        const dificultadesCtx = document.getElementById('dificultadesChart').getContext('2d');
+        const dificultadesChart = new Chart(dificultadesCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Sí enfrenta dificultades', 'No enfrenta dificultades', 'No sabe'],
+                datasets: [{
+                    data: [50.5, 46.5, 3],
+                    backgroundColor: ['#ff6b6b', '#4c956c', '#f9c74f'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+        
+        // Gráfico de Impacto
+        const impactoCtx = document.getElementById('impactoChart').getContext('2d');
+        const impactoChart = new Chart(impactoCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Falta recursos', 'Limitación apoyo emocional', 'Menos actividades', 'Menos personal', 'Otros'],
+                datasets: [{
+                    label: 'Porcentaje',
+                    data: [38.6, 31.7, 15.8, 10.9, 3],
+                    backgroundColor: '#2c6e49',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, max: 45 } }
+            }
+        });
+        
+        // Gráfico de Responsabilidad
+        const responsabilidadCtx = document.getElementById('responsabilidadChart').getContext('2d');
+        const responsabilidadChart = new Chart(responsabilidadCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Gobierno municipal', 'Gobierno estatal', 'Gobierno federal', 'Sociedad civil', 'Otros'],
+                datasets: [{
+                    data: [57.4, 20.8, 10.9, 8.9, 2],
+                    backgroundColor: ['#2c6e49', '#4c956c', '#95d5b2', '#b7e4c7', '#ff6b6b'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+        
+        // Gráfico de Soluciones
+        const solucionesCtx = document.getElementById('solucionesChart').getContext('2d');
+        const solucionesChart = new Chart(solucionesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Donativos', 'Apoyos directos', 'Voluntariado', 'Campañas', 'Fondos gubernamentales'],
+                datasets: [{
+                    label: 'Porcentaje',
+                    data: [30.71, 18.38, 15.84, 12.87, 22.2],
+                    backgroundColor: '#2c6e49',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, max: 35 } }
+            }
+        });
+        
+        // Smooth scrolling para los enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Efecto de aparición suave al hacer scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observar los elementos que deben aparecer
+        document.querySelectorAll('section, .chart-container').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+            
+            section.classList.add('visible');
+        });
+        
+        // Actualizar el CSS con las clases de visibilidad
+        const style = document.createElement('style');
+        style.textContent = `
+            section.visible, .chart-container.visible {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Menú móvil
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.add('active');
+        });
+        
+        document.getElementById('closeMenu').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.remove('active');
+        });
+        
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
